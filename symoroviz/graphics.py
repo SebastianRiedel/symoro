@@ -36,6 +36,7 @@ from symoroviz.objects import PrismaticJoint
 class VizGlCanvas(GLCanvas):
     def __init__(self, parent, robo, params, size=(600, 600)):
         super(VizGlCanvas, self).__init__(parent, size=size)
+        self.context = wx.glcanvas.GLContext(self)
         self.Bind(wx.EVT_PAINT, self.OnPaintAll)
         self.Bind(wx.EVT_SIZE, self.OnSize)
         self.Bind(wx.EVT_LEFT_DOWN, self.OnMouseDown)
@@ -140,8 +141,9 @@ class VizGlCanvas(GLCanvas):
 
     def OnSize(self, event):
         size = self.size = self.GetClientSize()
-        if self.GetContext():
-            self.SetCurrent()
+        if self.init:
+        #if self.GetContext():
+            self.SetCurrent(self.context)
             gl.glViewport(0, 0, size.width, size.height)
             #gl.glMatrixMode(gl.GL_PROJECTION)
             #gl.glLoadIdentity()
@@ -244,7 +246,7 @@ class VizGlCanvas(GLCanvas):
         self.Refresh(False)
 
     def OnPaintAll(self, event):
-        self.SetCurrent()
+        self.SetCurrent(self.context)
         if not self.init:
             self.InitGL()
             self.init = 1

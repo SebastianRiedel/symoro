@@ -63,11 +63,11 @@ class MainFrame(wx.Frame):
         # configure status bar
         self.statusbar.SetFieldsCount(number=2)
         self.statusbar.SetStatusWidths(widths=[-1, -1])
-        self.statusbar.SetStatusText(text="Ready", number=0)
+        self.statusbar.SetStatusText(text="Ready", i=0)
         self.statusbar.SetStatusText(
             text="Location of robot files is {0}".format(
                 filemgr.get_base_path()
-            ), number=1
+            ), i=1
         )
 
     def load_robot(self):
@@ -276,7 +276,9 @@ class MainFrame(wx.Frame):
             ), proportion=0,
             flag=wx.ALL | wx.ALIGN_LEFT, border=5
         )
-        szr_link.AddSpacer((4,4))
+        #szr_link.AddSpacer((4,4))
+        szr_link.Add(0,4,0)
+        szr_link.Add(4,0,0)
         szr_link.Add(cmb_link, flag=wx.ALL | wx.ALIGN_RIGHT)
         szr_dyn_params.Add(szr_link, flag=wx.ALL | wx.ALIGN_CENTER)
         szr_grd_dyn = wx.GridBagSizer(0, 0)
@@ -509,7 +511,7 @@ class MainFrame(wx.Frame):
         m_geom_constraint.Enable(constraint_enable)
         m_kin_constraint.Enable(constraint_enable)
         m_base_inertial_params.Enable(base_enable)
-        menu_bar.UpdateMenus()
+        #menu_bar.UpdateMenus()
 
     def create_menu(self):
         """Create the menu bar"""
