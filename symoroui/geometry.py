@@ -186,12 +186,12 @@ class DialogPaul(wx.Dialog):
                 cmb = wx.ComboBox(self,
                                   choices=[EMPTY, '-1', '0', '1', w_name],
                                   name=w_name, style=wx.CB_READONLY,
-                                  size=(90, -1), id=(j-1)*4 + i)
+                                  size=(90, -1), id=666+(j-1)*4 + i)
                 cmb.SetSelection(4)
                 cmb.Bind(wx.EVT_COMBOBOX, self.OnComboBox)
                 grid.Add(cmb, pos=(j, i))
             label = wx.StaticText(self,
-                                  label=(' 1' if i == 3 else ' 0'), id=12 + i)
+                                  label=(' 1' if i == 3 else ' 0'), id=666+12 + i)
             grid.Add(label, pos=(4, i))
         main_sizer.Add(grid, 0, wx.ALIGN_CENTER | wx.LEFT | wx.RIGHT, 35)
         main_sizer.AddSpacer(20)
@@ -228,7 +228,7 @@ class DialogPaul(wx.Dialog):
     def get_values(self):
         lst = []
         for i in range(16):
-            widget = self.FindWindowById(i)
+            widget = self.FindWindowById(666+i)
             if isinstance(widget, wx.ComboBox):
                 lst.append(widget.Value)
             else:
